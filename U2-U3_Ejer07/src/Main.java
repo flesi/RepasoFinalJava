@@ -1,3 +1,4 @@
+import java.util.Optional;
 
 public class Main {
 
@@ -10,8 +11,18 @@ public class Main {
 //			System.out.println(company.toString());
 //		}
 
+//		Optional eMP = companyManagement.nombreEmpresaMasEmpleados();
+//		if (eMP.isPresent()) {
+//			System.out.println(eMP.toString());
+//		} else {
+//			System.out.println("no existe");
+//		}
 		
 		
+		
+		for (Object string : companyManagement.getCompanyFromCountry("United States of America").toArray()) {
+			System.out.println(string.toString());
+		}		
 	}
 
 }

@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 public class CompanyManagement {
@@ -51,12 +53,24 @@ public class CompanyManagement {
 	
 	
 //	//API STREAM
+	
+	
 //	Extraer las 10 empresas con mayor número de empleados (todos los datos).
-//	public List<Company> top10() {
-//		
-//	}
+	public List<Company> top10() {
+		return companys.stream()
+		.sorted(Comparator.comparingInt(Company::getNumberOfEmployees))
+		.limit(10)
+		.collect(Collectors.toList());
+	}
+
 	
 //	Extraer la empresa (solo nombre) con mayor número de empleados.
+	public Optional<String> nombreEmpresaMasEmpleados(){
+		return companys.stream()
+		.sorted(Comparator.comparingInt(Company::getNumberOfEmployees).reversed())
+		.map(Company::getName)
+		.findFirst();
+	}
 	
 //	Extraer las empresas (todos los datos) de varios países pasados como parámetros.
 	public List<Company> getCompanyCountrys(String pais1, String pais2){
@@ -66,6 +80,12 @@ public class CompanyManagement {
 	}
 	
 //	Mostrar las empresas de un país concreto ordenando los datos por número de trabajadores de forma ascendente.
-
+	public List<Company> getCompanyFromCountry(String country){
+		return companys.stream()
+		.filter(e -> e.getCountry().equalsIgnoreCase(country))
+		.sorted(Comparator.comparingInt(Company::getNumberOfEmployees))
+		.collect(Collectors.toList());
+	}
+	
 	
 }
