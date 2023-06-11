@@ -8,7 +8,7 @@ public class ConectarBd {
 
 	public static Connection getConnection() throws SQLException {
 		if (con == null) {
-			con = DriverManager.getConnection("jdbc:mysql://localhost/classicmodels", 
+			con = DriverManager.getConnection("jdbc:mysql://localhost/gestionalumnos", 
 					"root", "");
 		}
 		return con;

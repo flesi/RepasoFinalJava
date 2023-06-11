@@ -18,8 +18,11 @@ public class GestionEmpleados {
 			
 			while ((linea = br.readLine())!=null) {
 				System.out.print(linea);
-				if (esEmpleado(linea.split(",")[0])) {
-					
+				int nEmpleado = Integer.parseInt(linea.split(",")[0]);
+				if (esEmpleado(nEmpleado)) {
+					System.out.print(" - Es Empleado");
+				} else {
+					System.out.print(" - No es Empleado");
 				}
 				System.out.println("");
 			}
@@ -37,7 +40,7 @@ public class GestionEmpleados {
 	}
 	
 	
-	public boolean esEmpleado(int nEmpleado) {
+	public static boolean esEmpleado(int nEmpleado) {
 		boolean esEmpleado=false;
 		try {
 			Connection con = ConectarBd.getConnection();
