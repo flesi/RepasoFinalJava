@@ -18,11 +18,14 @@ public class Main {
 //			System.out.println("no existe");
 //		}
 		
+		for (Company company : companyManagement.top10()) {
+			System.out.println(company.toString());
+		}
 		
 		
-		for (Object string : companyManagement.getCompanyFromCountry("United States of America").toArray()) {
-			System.out.println(string.toString());
-		}		
+//		for (Object string : companyManagement.getCompanyFromCountry("United States of America").toArray()) {
+//			System.out.println(string.toString());
+//		}		
 	}
 
 }

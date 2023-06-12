@@ -12,8 +12,7 @@ public class GestionNotas {
 	
 	private ArrayList<String> nuevasNotas = new ArrayList<String>();
 	
-	public ArrayList<String> cargarDocumento() {
-		
+	private ArrayList<String> cargarDocumento() {
 		try {
 			BufferedReader br = new BufferedReader(new FileReader("nuevasNotas.csv"));
 //			 CSV -> id de alumno, id de examen, nota.
@@ -39,27 +38,31 @@ public class GestionNotas {
 		cargarDocumento();
 		try {
 			Connection con = ConectarBd.getConnection();
-			String sql = "UPDATE notasprueba SET nota = ? WHERE idalumno=? AND idexamen=? AND nota < ?;";
+			String sql = "UPDATE notas SET nota = ? WHERE idalumno=? AND idexamen=? AND nota < ?;";
 			
 			PreparedStatement ps = con.prepareStatement(sql);
 			for (String nuevaNota : nuevasNotas) {
 				int idAlumno = Integer.parseInt(nuevaNota.split(";")[0]);
 				int idExamen = Integer.parseInt(nuevaNota.split(";")[1]);
 				double nota = Double.parseDouble(nuevaNota.split(";")[2]);
+				
 				ps.setDouble(1, nota);
 				ps.setInt(2, idAlumno);
 				ps.setInt(3, idExamen);
 				ps.setDouble(4, nota);
+				
+				int n = ps.executeUpdate();
+				
+				// LOG CONSOLA
 				System.out.println("IdAlumno: "+ idAlumno);
 				System.out.println("IdExamen: "+ idExamen);
 				System.out.println("Nota: "+ nota);
-				int n = ps.executeUpdate();
+												
 				if (n==1) {
 					System.out.println("Nota Actualizada");
 				} else {
 					System.out.println("Nota No Actualizada");
 				}
-				System.out.println(n);
 				System.out.println("*******");
 			}
 			

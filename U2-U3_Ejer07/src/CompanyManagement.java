@@ -58,7 +58,7 @@ public class CompanyManagement {
 //	Extraer las 10 empresas con mayor número de empleados (todos los datos).
 	public List<Company> top10() {
 		return companys.stream()
-		.sorted(Comparator.comparingInt(Company::getNumberOfEmployees))
+		.sorted(Comparator.comparingInt(Company::getNumberOfEmployees).reversed())
 		.limit(10)
 		.collect(Collectors.toList());
 	}

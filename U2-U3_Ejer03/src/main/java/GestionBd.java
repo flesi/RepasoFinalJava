@@ -2,6 +2,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 
 public class GestionBd {
 
@@ -23,9 +24,12 @@ public class GestionBd {
 			
 			rs.next();
 			
-			notaMedia = rs.getDouble("notaMedia");
-			
-			
+			if (rs.getString(1)!=null) {
+				notaMedia = rs.getDouble("notaMedia");				
+			}else {
+				System.out.println("Examen No encontrado");
+			} 
+				
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
